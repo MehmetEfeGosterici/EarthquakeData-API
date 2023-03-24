@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
+
 @RequestMapping("/EarthquakeData")
 @RestController
 public class EarthquakeApiController {
@@ -22,7 +24,7 @@ public class EarthquakeApiController {
     }
 
     @GetMapping
-    public ResponseEntity<BaseResponse> getEarthquakeDataByCountry(@RequestParam String country, @RequestParam String days){
+    public ResponseEntity<BaseResponse> getEarthquakeDataByCountry(@RequestParam String country, @RequestParam String days) throws IOException {
             return earthquakeApiService.getEarthquakeDataByCountry(country,days);
     }
 
