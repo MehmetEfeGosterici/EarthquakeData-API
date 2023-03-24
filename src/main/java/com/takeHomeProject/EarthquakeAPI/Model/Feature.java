@@ -7,8 +7,8 @@ import java.util.List;
 @Data
 public class Feature {
     String type;
-    Object properties;
+    Properties properties;
     List<Double> bbox;
-    Object geometry;
+    Geometry geometry;
 
 }

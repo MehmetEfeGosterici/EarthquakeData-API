@@ -5,11 +5,12 @@ import lombok.Data;
 @Data
 public class Properties {
 
-    int mag;
+    Double mag;
     String place;
     String type;
     String title;
     String url;
     String display_name;
+    String time;
 
 }
