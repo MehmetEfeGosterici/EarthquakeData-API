@@ -15,7 +15,7 @@ You can find the mentioned open-source API <a href="https://nominatim.org/releas
 After detailed examination of the US government earthquake API documentation I have found multiple parameters
 that I thought would be very usefull and should be included for a better user experience. Therefore I added other endpoints which
 can search for records in a given date range which I believe is vital for searches of records that might date years back. Another important
-feature of the added endpoins is filtering abilities (magnitude, depth, limit and orderBy) in order to return a more accurate cluster of data.
+feature of the added endpoints are filtering abilities (magnitude, depth, limit and orderBy) in order to return a more accurate cluster of data.
 </br></br>
 
 While searching for bugs I noticed how long it took for requests to return which was caused by the 3rd party API I was using
