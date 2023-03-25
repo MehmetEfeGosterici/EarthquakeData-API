@@ -1,0 +1,132 @@
+{
+	"info": {
+		"_postman_id": "db3979cf-bf6c-49bc-8489-49895bf6eeb0",
+		"name": "EarthquakeAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16622942"
+	},
+	"item": [
+		{
+			"name": "getEarthquakeDataByCountryAndDays",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/EarthquakeData?country=turkey&days=1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"EarthquakeData"
+					],
+					"query": [
+						{
+							"key": "country",
+							"value": "turkey"
+						},
+						{
+							"key": "days",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getEarthquakeDataByCountryAndDateRange",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/EarthquakeData/dateRange?country=turkey&startDate=06-02-2023&endDate=07-02-2023",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"EarthquakeData",
+						"dateRange"
+					],
+					"query": [
+						{
+							"key": "country",
+							"value": "turkey"
+						},
+						{
+							"key": "startDate",
+							"value": "06-02-2023"
+						},
+						{
+							"key": "endDate",
+							"value": "07-02-2023"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getFilteredEarthquakeData",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/EarthquakeData/filter?country=turkey&startDate=06-02-2023&endDate=07-02-2023&maxMagnitude=6&minMagnitude=5&maxDepth=30&minDepth=0&limit=20&orderBy=magnitude_asc",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"EarthquakeData",
+						"filter"
+					],
+					"query": [
+						{
+							"key": "country",
+							"value": "turkey"
+						},
+						{
+							"key": "startDate",
+							"value": "06-02-2023"
+						},
+						{
+							"key": "endDate",
+							"value": "07-02-2023"
+						},
+						{
+							"key": "maxMagnitude",
+							"value": "6"
+						},
+						{
+							"key": "minMagnitude",
+							"value": "5"
+						},
+						{
+							"key": "maxDepth",
+							"value": "30"
+						},
+						{
+							"key": "minDepth",
+							"value": "0"
+						},
+						{
+							"key": "limit",
+							"value": "20"
+						},
+						{
+							"key": "orderBy",
+							"value": "magnitude_asc",
+							"description": "time,time_asc,magnitude,magnitude_asc"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
