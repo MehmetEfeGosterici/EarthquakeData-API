@@ -1,20 +1,18 @@
 package com.takeHomeProject.EarthquakeAPI.Service;
 
-import com.takeHomeProject.EarthquakeAPI.Model.*;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.math.NumberUtils;
-import org.apache.http.client.fluent.Request;
-import org.apache.http.util.EntityUtils;
+import com.takeHomeProject.EarthquakeAPI.Model.BaseResponse;
+import com.takeHomeProject.EarthquakeAPI.Model.EarthquakeData;
+import com.takeHomeProject.EarthquakeAPI.Model.GeoJson;
+import com.takeHomeProject.EarthquakeAPI.Model.OrderByEnum;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.time.Instant;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.List;
+import java.util.Objects;
 
 @Service
 public class EarthquakeApiService extends BaseService {
@@ -26,8 +24,8 @@ public class EarthquakeApiService extends BaseService {
 
         List<Double> countryBorderBox = getCountryBorderBox(country);
 
-        if(Objects.isNull(countryBorderBox)){
-            return new ResponseEntity<>(new BaseResponse("Invalid Country Name"),HttpStatus.BAD_REQUEST);
+        if (Objects.isNull(countryBorderBox)) {
+            return new ResponseEntity<>(new BaseResponse("Invalid Country Name"), HttpStatus.BAD_REQUEST);
         }
 
         GeoJson responseObject = earthquakeDataRequest(startDate, endDate, countryBorderBox);
@@ -46,8 +44,8 @@ public class EarthquakeApiService extends BaseService {
 
         List<Double> countryBorderBox = getCountryBorderBox(country);
 
-        if(Objects.isNull(countryBorderBox)){
-            return new ResponseEntity<>(new BaseResponse("Invalid Country Name"),HttpStatus.BAD_REQUEST);
+        if (Objects.isNull(countryBorderBox)) {
+            return new ResponseEntity<>(new BaseResponse("Invalid Country Name"), HttpStatus.BAD_REQUEST);
         }
 
         GeoJson responseObject = earthquakeDataRequest(startDate, endDate, countryBorderBox);
@@ -60,18 +58,18 @@ public class EarthquakeApiService extends BaseService {
         return new ResponseEntity<>(new BaseResponse(earthquakeDataList), HttpStatus.OK);
     }
 
-    public ResponseEntity<BaseResponse> filterEarthquakes(String country, String sDate, String eDate, Integer minMagnitude, Integer maxMagnitude, Integer minDepth, Integer maxDepth, OrderByEnum orderBy) throws IOException {
+    public ResponseEntity<BaseResponse> filterEarthquakes(String country, String sDate, String eDate, Integer minMagnitude, Integer maxMagnitude, Integer minDepth, Integer maxDepth, Integer limit, OrderByEnum orderBy) throws IOException {
 
         LocalDate startDate = LocalDate.parse(sDate, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
         LocalDate endDate = LocalDate.parse(eDate, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
 
         List<Double> countryBorderBox = getCountryBorderBox(country);
 
-        if(Objects.isNull(countryBorderBox)){
-            return new ResponseEntity<>(new BaseResponse("Invalid Country Name"),HttpStatus.BAD_REQUEST);
+        if (Objects.isNull(countryBorderBox)) {
+            return new ResponseEntity<>(new BaseResponse("Invalid Country Name"), HttpStatus.BAD_REQUEST);
         }
 
-        GeoJson responseObject = filterEarthquakeDataRequest(startDate, endDate, countryBorderBox,minMagnitude,maxMagnitude,minDepth,maxDepth,orderBy);
+        GeoJson responseObject = filterEarthquakeDataRequest(startDate, endDate, countryBorderBox, minMagnitude, maxMagnitude, minDepth, maxDepth, limit, orderBy);
 
         if (responseObject.getFeatures().isEmpty()) {
             return new ResponseEntity<>(new BaseResponse(String.format("No matching earthquakes were recorded between %s and %s", startDate, endDate)), HttpStatus.NOT_FOUND);

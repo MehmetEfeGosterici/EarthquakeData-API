@@ -20,23 +20,23 @@ public class EarthquakeApiController {
     //EarthquakeApiService earthquakeApiService;
     EarthquakeApiService earthquakeApiService;
 
-    public EarthquakeApiController(EarthquakeApiService earthquakeApiService){
+    public EarthquakeApiController(EarthquakeApiService earthquakeApiService) {
         this.earthquakeApiService = earthquakeApiService;
     }
 
     @GetMapping
     public ResponseEntity<BaseResponse> getEarthquakeDataByCountry(@RequestParam String country, @RequestParam String days) throws IOException {
-            return earthquakeApiService.getEarthquakeDataByCountry(country,days);
+        return earthquakeApiService.getEarthquakeDataByCountry(country, days);
     }
 
     @GetMapping("/dateRange")
     public ResponseEntity<BaseResponse> getEarthquakeDataByCountryAndDateRange(@RequestParam String country, @RequestParam String startDate, @RequestParam String endDate) throws IOException {
-        return earthquakeApiService.getEarthquakeDataByCountryAndDateRange(country,startDate,endDate);
+        return earthquakeApiService.getEarthquakeDataByCountryAndDateRange(country, startDate, endDate);
     }
 
     @GetMapping("/filter")
-    public ResponseEntity<BaseResponse> filterEarthquakeData(@RequestParam String country, @RequestParam String startDate, @RequestParam String endDate, @RequestParam(required = false) Integer minMagnitude, @RequestParam(required = false) Integer maxMagnitude, @RequestParam(required = false) Integer minDepth, @RequestParam(required = false) Integer maxDepth, @RequestParam(required = false) OrderByEnum orderBy) throws IOException {
-        return earthquakeApiService.filterEarthquakes(country,startDate,endDate,minMagnitude,maxMagnitude,minDepth,maxDepth,orderBy);
+    public ResponseEntity<BaseResponse> filterEarthquakeData(@RequestParam String country, @RequestParam String startDate, @RequestParam String endDate, @RequestParam(required = false) Integer minMagnitude, @RequestParam(required = false) Integer maxMagnitude, @RequestParam(required = false) Integer minDepth, @RequestParam(required = false) Integer maxDepth, @RequestParam(required = false) Integer limit, @RequestParam(required = false) OrderByEnum orderBy) throws IOException {
+        return earthquakeApiService.filterEarthquakes(country, startDate, endDate, minMagnitude, maxMagnitude, minDepth, maxDepth, limit, orderBy);
     }
 
 }

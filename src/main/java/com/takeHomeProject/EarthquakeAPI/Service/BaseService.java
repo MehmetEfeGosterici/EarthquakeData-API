@@ -6,7 +6,6 @@ import com.takeHomeProject.EarthquakeAPI.Model.Feature;
 import com.takeHomeProject.EarthquakeAPI.Model.GeoJson;
 import com.takeHomeProject.EarthquakeAPI.Model.OrderByEnum;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.http.client.fluent.Request;
 import org.apache.http.util.EntityUtils;
 import org.springframework.stereotype.Service;
@@ -71,7 +70,7 @@ public class BaseService {
         return gson.fromJson(responseString, GeoJson.class);
     }
 
-    public GeoJson filterEarthquakeDataRequest(LocalDate endDate, LocalDate startDate, List<Double> countryBorderBox, Integer minMag, Integer maxMag, Integer minDep, Integer maxDep, OrderByEnum orderBy) throws IOException {
+    public GeoJson filterEarthquakeDataRequest(LocalDate endDate, LocalDate startDate, List<Double> countryBorderBox, Integer minMag, Integer maxMag, Integer minDep, Integer maxDep, Integer limit, OrderByEnum orderBy) throws IOException {
 
         String requestUrl = String.format("https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=%s&endtime=%s&minlatitude=%s&maxlatitude=%s&minlongitude=%s&maxlongitude=%s",
                 endDate, startDate, countryBorderBox.get(1), countryBorderBox.get(3), countryBorderBox.get(0), countryBorderBox.get(2));
@@ -84,11 +83,12 @@ public class BaseService {
             requestUrl = requestUrl.concat("&mindepth=" + minDep);
         if (Objects.nonNull((maxDep)))
             requestUrl = requestUrl.concat("&maxdepth=" + maxDep);
+        if (Objects.nonNull((limit)))
+            requestUrl = requestUrl.concat("&limit=" + limit);
         if (Objects.nonNull(orderBy)) {
             String orderByValue = orderBy.toString().replace("_", "-");
             requestUrl = requestUrl.concat("&orderby=" + orderByValue);
         }
-
 
         String responseString = EntityUtils.toString(Request
                 .Get(requestUrl)
